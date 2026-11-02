@@ -1,0 +1,69 @@
+import 'package:recetas_app_v1/models/recetas.dart';
+import 'package:flutter/material.dart';
+
+class RecetaCard extends StatelessWidget {
+  final Receta receta;
+  final VoidCallback? onTap;
+  const RecetaCard({super.key, required this.receta, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(14),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(10),
+                child: Image.network(
+                  receta.imagenUrl,
+                  width: 72,
+                  height: 72,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stack) => Image.asset(
+                    'assets/images/plato-placeholder.jpg',
+                    width: 72,
+                    height: 72,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      receta.nombre,
+                      style: const TextStyle(
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${receta.porciones} · ${receta.calorias} · ${receta.tiempoTotal} min',
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
