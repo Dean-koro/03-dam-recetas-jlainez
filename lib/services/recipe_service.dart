@@ -11,7 +11,7 @@ class RecipeService {
     if(respuesta.statusCode == 200){
       final Map<String, dynamic> datos = jsonDecode(respuesta.body);
       final List<dynamic> listaRecetas = datos['recipes'];
-      print(listaRecetas);
+      //print(listaRecetas);
       return listaRecetas.
       map((recetaJson) => Receta.fromJson(recetaJson))
       .toList();
